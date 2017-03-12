@@ -1,0 +1,47 @@
+{
+  "name": "oss-async-await",
+  "version": "0.1.0",
+  "description": "阿里云oss sdk，支持es7 async/await",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "prepublish": "npm run clean && npm run build",
+    "clean": "rimraf lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hahoocn/oss-async-await.git"
+  },
+  "keywords": [
+    "aliyun",
+    "oss",
+    "ali-oss",
+    "async",
+    "await"
+  ],
+  "author": "Ray Guo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hahoocn/oss-async-await/issues"
+  },
+  "homepage": "https://github.com/hahoocn/oss-async-await#readme",
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-eslint": "^7.1.1",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "cross-env": "^3.2.3",
+    "eslint": "^3.17.1",
+    "eslint-config-airbnb-base": "^11.1.1",
+    "eslint-plugin-import": "^2.2.0",
+    "rimraf": "^2.6.1"
+  },
+  "dependencies": {
+    "mime": "^1.3.4",
+    "moment": "^2.17.1",
+    "request": "^2.81.0",
+    "xml2js": "^0.4.17"
+  }
+}
