@@ -60,7 +60,7 @@ function canonicalizedResource(path, bucketName) {
         'response-content-encoding'
       ];
       const resources = [];
-      for (const param of params.values()) {
+      params.forEach((param) => {
         const paramArr = param.split('=');
         const name = paramArr[0].trim();
         const value = paramArr.length > 1 ? paramArr[1].trim() : undefined;
@@ -75,7 +75,7 @@ function canonicalizedResource(path, bucketName) {
           }
           resources.push(subresource);
         }
-      }
+      });
 
       if (resources.length > 0) {
         // 从小到大排序
@@ -84,14 +84,12 @@ function canonicalizedResource(path, bucketName) {
           return val;
         });
         // 重组qs
-        const qs = [];
-        for (const param of resources.values()) {
+        const qs = resources.map((param) => {
           if (param.value) {
-            qs.push(`${param.name}=${param.value}`);
-          } else {
-            qs.push(param.name);
+            return `${param.name}=${param.value}`;
           }
-        }
+          return param.name;
+        });
 
         resource += `?${qs.join('&')}`;
       }
