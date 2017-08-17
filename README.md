@@ -1,7 +1,9 @@
 # oss-async-await
-使用es7 async/await重新开发阿里云oss的sdk，返回Promise，可直接使用async/await调用。
+使用async/await开发阿里云oss的sdk，返回Promise，可直接使用async/await调用。
 
 注意：暂时只开发了最常用的Object的一些接口。Serive和Bucket的接口暂未开发。
+
+从v0.2.0开始，只支持node8
 
 ## 安装
 ```
