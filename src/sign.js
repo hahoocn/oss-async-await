@@ -14,10 +14,7 @@ function canonicalizedHeaders(headers) {
     return val;
   });
 
-  const parts = [];
-  for (const header of headerArr.values()) {
-    parts.push(`${header.toLowerCase()}:${headers[header]}`);
-  }
+  const parts = headerArr.map(header => `${header.toLowerCase()}:${headers[header]}`);
 
   return parts.join('\n');
 }
