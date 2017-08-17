@@ -54,13 +54,13 @@ function request(options) {
       };
       if (body) {
         parseXML(body)
-        .then((result) => {
-          res.body = result;
-          resolve(res);
-        })
-        .catch((err) => {
-          reject(err);
-        });
+          .then((result) => {
+            res.body = result;
+            resolve(res);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       }
       resolve(res);
     });
@@ -104,9 +104,9 @@ function delFile(path) {
 
 function contentMD5(content) {
   const md5 = crypto
-  .createHash('md5')
-  .update(new Buffer(content, 'utf8'))
-  .digest('base64');
+    .createHash('md5')
+    .update(new Buffer(content, 'utf8'))
+    .digest('base64');
   return md5;
 }
 

@@ -138,18 +138,18 @@ class AliOSS {
 
       return new Promise((resolve, reject) => {
         request(params)
-        .on('response', (response) => {
-          if (response.statusCode < 200 || response.statusCode >= 300) {
+          .on('response', (response) => {
+            if (response.statusCode < 200 || response.statusCode >= 300) {
+              if (needDestroy) { utils.delFile(dst); }
+              reject({ status: response.statusCode, headers: response.headers });
+            }
+            resolve({ status: response.statusCode, headers: response.headers });
+          })
+          .on('error', (err) => {
             if (needDestroy) { utils.delFile(dst); }
-            reject({ status: response.statusCode, headers: response.headers });
-          }
-          resolve({ status: response.statusCode, headers: response.headers });
-        })
-        .on('error', (err) => {
-          if (needDestroy) { utils.delFile(dst); }
-          reject(err);
-        })
-        .pipe(writeStream);
+            reject(err);
+          })
+          .pipe(writeStream);
       });
     } catch (e) {
       return Promise.reject(e);
@@ -226,20 +226,17 @@ class AliOSS {
       },
       url: utils.getUrl(this.options, src)
     };
-    const body = `
-      <?xml version="1.0" encoding="UTF-8"?>
-
-      <Delete>
-        <Quiet>${options.quiet ? 'true' : 'false'}</Quiet>
-        ${objArray.map((key) => {
-          const items = `
-          <Object>
-            <Key>${key}</Key>
-          </Object>`;
-          return items;
-        })}
-      </Delete>
-    `;
+    const body = `<?xml version="1.0" encoding="UTF-8"?>
+<Delete>
+  <Quiet>${options.quiet ? 'true' : 'false'}</Quiet>
+    ${objArray.map((key) => {
+    const items = `
+    <Object>
+      <Key>${key}</Key>
+    </Object>`;
+    return items;
+  })}
+</Delete>`;
     params.body = body;
     params.headers['Content-Length'] = body.length;
     params.headers['Content-MD5'] = utils.contentMD5(body);
