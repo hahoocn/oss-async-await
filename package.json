@@ -1,6 +1,6 @@
 {
   "name": "oss-async-await",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "阿里云oss sdk，支持async/await",
   "main": "lib/index.js",
   "scripts": {

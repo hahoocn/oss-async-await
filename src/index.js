@@ -34,7 +34,7 @@ class AliOSS {
     try {
       if (Buffer.isBuffer(src)) {
         params.headers['Content-Length'] = await utils.getContentLength(src);
-        params.headers['Content-Md5'] = utils.contentMD5(src);
+        params.headers['Content-MD5'] = utils.contentMD5(src);
         params.body = src;
       } else if (src instanceof stream.Stream) {
         if (!(options.headers && options.headers['Content-Length'])) {
